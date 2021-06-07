@@ -298,6 +298,46 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
+		
+                try {
+
+
+                String id, name, sp, did ;
+                System.out.println("Enter Doctor ID ");
+                id = in.readLine();
+                System.out.println("your input for  Doctor ID: " + id);
+
+                System.out.println("Enter Doctor Name");
+                name = in.readLine();
+                System.out.println("your input for  Doctor name: " + name);
+
+                System.out.println("Enter Specialty");
+                sp = in.readLine();
+                System.out.println("your input for  Doctor sp: " + sp);
+
+                System.out.println("Enter Department ID");
+                did = in.readLine();
+                System.out.println("your input for  DID: " +  did);
+
+/*
+ * doctor_ID INTEGER NOT NULL,
+ *      	name VARCHAR(128),
+ *              specialty VARCHAR(24),
+ *              did INTEGER NOT NULL,
+ *              PRIMARY KEY (doctor_ID),
+ *              FOREIGN KEY (did) REFERENCES Department(dept_ID)
+ *              */
+
+                String query = "INSERT INTO doctor (doctor_id , name , specialty , did) VALUES ( " + id + " , '" + name + "' , '" + sp + "' , " + did + " );";
+                esql.executeUpdate(query);
+                }
+                catch (Exception e){
+
+                System.err.println (e.getMessage());
+
+
+                }
+		
 	}
 
 	public static void AddPatient(DBproject esql) {//2
