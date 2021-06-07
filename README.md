@@ -2,7 +2,9 @@
 
 Init envirement : 
 RUN following commands
+
 source ./postgresql/startPostgreSQL.sh
+
 source ./postgresql/createPostgreDB.sh
 
 useless : 
