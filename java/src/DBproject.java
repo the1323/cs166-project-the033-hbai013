@@ -298,7 +298,14 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
-		
+		/*
+	 	 * doctor_ID INTEGER NOT NULL,
+ *      	name VARCHAR(128),
+ *              specialty VARCHAR(24),
+ *              did INTEGER NOT NULL,
+ *              PRIMARY KEY (doctor_ID),
+ *              FOREIGN KEY (did) REFERENCES Department(dept_ID)
+ *              */
                 try {
 
 
@@ -318,15 +325,8 @@ public class DBproject{
                 System.out.println("Enter Department ID");
                 did = in.readLine();
                 System.out.println("your input for  DID: " +  did);
-
-/*
- * doctor_ID INTEGER NOT NULL,
- *      	name VARCHAR(128),
- *              specialty VARCHAR(24),
- *              did INTEGER NOT NULL,
- *              PRIMARY KEY (doctor_ID),
- *              FOREIGN KEY (did) REFERENCES Department(dept_ID)
- *              */
+	
+		
 
                 String query = "INSERT INTO doctor (doctor_id , name , specialty , did) VALUES ( " + id + " , '" + name + "' , '" + sp + "' , " + did + " );";
                 esql.executeUpdate(query);
@@ -341,18 +341,120 @@ public class DBproject{
 	}
 
 	public static void AddPatient(DBproject esql) {//2
+		
+		/*patient_ID INTEGER NOT NULL,
+	name VARCHAR(128) NOT NULL,	
+	gtype _GENDER NOT NULL,
+	age INTEGER NOT NULL,
+	address VARCHAR(256),
+	number_of_appts INTEGER,
+	PRIMARY KEY (patient_ID)*/
+		 try {
+
+
+                String pid, name, gtype, age, address, napp ;
+                System.out.println("Enter Patient ID ");
+                pid = in.readLine();
+                System.out.println("your input for  Patient ID: " + pid);
+
+                System.out.println("Enter Patient Name");
+                name = in.readLine();
+                System.out.println("your input for  Patient name: " + name);
+
+                System.out.println("Enter gender M/F");
+                gtype = in.readLine();
+                System.out.println("your input for  gender: " + gtype);
+
+                System.out.println("Enter  age");
+                age = in.readLine();
+                System.out.println("your input for  age: " +  age);
+			 
+		System.out.println("Enter address");
+                address = in.readLine();
+                System.out.println("your input for  address: " + address);
+			 
+		System.out.println("Enter number_of_appts");
+                napp = in.readLine();
+                System.out.println("your input for  number_of_appts: " + napp);
+			 
+	
+		
+
+                String query = "INSERT INTO Patient (patient_ID , name , gtype , age , address , number_of_appts) VALUES ( " + pid + " , '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , " + napp + " );";
+                esql.executeUpdate(query);
+                }
+                catch (Exception e){
+
+                System.err.println (e.getMessage());
+
+
+                }
+		
+		
+		
+		
+		
 	}
+	
 
 	public static void AddAppointment(DBproject esql) {//3
+		
+		
+		/*
+		appnt_ID INTEGER NOT NULL,	
+		adate DATE NOT NULL, eg '2018-10-20'
+		time_slot VARCHAR(11),
+		status _STATUS,
+		PRIMARY KEY (appnt_ID)
+		
+		*/
+		 try {
+
+
+                String appnt_ID , adate, time_slot, status ;
+                System.out.println("Enter appnt_ID");
+                appnt_ID = in.readLine();
+                System.out.println("your input for  appnt_ID: " + appnt_ID);
+
+                System.out.println("Enter adate");
+                adate = in.readLine();
+                System.out.println("your input for  adate: " + adate);
+
+                System.out.println("Enter time_slot");
+                time_slot = in.readLine();
+                System.out.println("your input for  time_slot: " + time_slot);
+
+                System.out.println("Enter status");
+                status = in.readLine();
+                System.out.println("your input for status: " +  status);
+	
+		
+
+                String query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + adate + "' , '" + time_slot + "' , '" + status + "' );";
+                esql.executeUpdate(query);
+                }
+                catch (Exception e){
+
+                System.err.println (e.getMessage());
+
+
+                }
+		
+		
+		
 	}
 
 
 	public static void MakeAppointment(DBproject esql) {//4
+		//
 		// Given a patient, a doctor and an appointment of the doctor that s/he wants to take, add an appointment to the DB
 	}
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
+		//select * from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id where  adate between '2011/1/1' and '2022/1/1'  and doctor_id = 25 and (status = 'AC' or status = 'AV');
+		
+		
 	}
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
