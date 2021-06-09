@@ -341,22 +341,20 @@ public class DBproject{
 	}
 
 	public static void AddPatient(DBproject esql) {//2
+		public static void AddPatient(DBproject esql) {//2
 		
 		/*patient_ID INTEGER NOT NULL,
-	name VARCHAR(128) NOT NULL,	
-	gtype _GENDER NOT NULL,
-	age INTEGER NOT NULL,
-	address VARCHAR(256),
-	number_of_appts INTEGER,
-	PRIMARY KEY (patient_ID)*/
+		name VARCHAR(128) NOT NULL,	
+		gtype _GENDER NOT NULL,
+		age INTEGER NOT NULL,
+		address VARCHAR(256),
+		number_of_appts INTEGER,
+		PRIMARY KEY (patient_ID)*/
 		 try {
 
-
+                Integer pid = 1+ esql.executeQuery("select max(patient_id) from patient;");
                 String pid, name, gtype, age, address, napp ;
-                System.out.println("Enter Patient ID ");
-                pid = in.readLine();
-                System.out.println("your input for  Patient ID: " + pid);
-
+                
                 System.out.println("Enter Patient Name");
                 name = in.readLine();
                 System.out.println("your input for  Patient name: " + name);
@@ -369,11 +367,11 @@ public class DBproject{
                 age = in.readLine();
                 System.out.println("your input for  age: " +  age);
 			 
-		System.out.println("Enter address");
+		        System.out.println("Enter address");
                 address = in.readLine();
                 System.out.println("your input for  address: " + address);
 			 
-		System.out.println("Enter number_of_appts");
+		        System.out.println("Enter number_of_appts");
                 napp = in.readLine();
                 System.out.println("your input for  number_of_appts: " + napp);
 			 
@@ -381,6 +379,7 @@ public class DBproject{
 		
 
                 String query = "INSERT INTO Patient (patient_ID , name , gtype , age , address , number_of_appts) VALUES ( " + pid + " , '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , " + napp + " );";
+                System.out.println("QUERY: "query);
                 esql.executeUpdate(query);
                 }
                 catch (Exception e){
@@ -390,6 +389,11 @@ public class DBproject{
 
                 }
 		
+		
+		
+		
+		
+	}
 		
 		
 		
