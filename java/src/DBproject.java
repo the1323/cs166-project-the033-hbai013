@@ -353,7 +353,7 @@ public class DBproject{
 		 try {
 
                 Integer pid = 1+ esql.executeQuery("select max(patient_id) from patient;");
-                String pid, name, gtype, age, address, napp ;
+                String  name, gtype, age, address, napp ;
                 
                 System.out.println("Enter Patient Name");
                 name = in.readLine();
