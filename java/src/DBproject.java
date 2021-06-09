@@ -379,7 +379,7 @@ public class DBproject{
 		
 
                 String query = "INSERT INTO Patient (patient_ID , name , gtype , age , address , number_of_appts) VALUES ( " + pid + " , '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , " + napp + " );";
-                System.out.println("QUERY: "query);
+                System.out.println("QUERY: " + query);
                 esql.executeUpdate(query);
                 }
                 catch (Exception e){
@@ -388,16 +388,6 @@ public class DBproject{
 
 
                 }
-		
-		
-		
-		
-		
-	
-		
-		
-		
-		
 	}
 	
 
