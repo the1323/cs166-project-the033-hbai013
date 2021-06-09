@@ -341,7 +341,7 @@ public class DBproject{
 	}
 
 	public static void AddPatient(DBproject esql) {//2
-		public static void AddPatient(DBproject esql) {//2
+		
 		
 		/*patient_ID INTEGER NOT NULL,
 		name VARCHAR(128) NOT NULL,	
