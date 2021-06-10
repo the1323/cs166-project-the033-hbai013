@@ -308,26 +308,18 @@ public class DBproject{
  *              */
                 try {
 
-
-                String id, name, sp, did ;
-                System.out.println("Enter Doctor ID ");
-                id = in.readLine();
-                System.out.println("your input for  Doctor ID: " + id);
+		Integer id = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(doctor_id) from doctor;").get(0).get(0));
+                String name, sp, did ;
 
                 System.out.println("Enter Doctor Name");
                 name = in.readLine();
-                System.out.println("your input for  Doctor name: " + name);
-
                 System.out.println("Enter Specialty");
                 sp = in.readLine();
-                System.out.println("your input for  Doctor sp: " + sp);
-
                 System.out.println("Enter Department ID");
                 did = in.readLine();
-                System.out.println("your input for  DID: " +  did);
 	
 		
-
+		System.out.println("New Doctor: ID: " + id + " Name: " + name + " specialty: "+ sp + " did: " + did);
                 String query = "INSERT INTO doctor (doctor_id , name , specialty , did) VALUES ( " + id + " , '" + name + "' , '" + sp + "' , " + did + " );";
                 esql.executeUpdate(query);
                 }
@@ -352,7 +344,7 @@ public class DBproject{
 		PRIMARY KEY (patient_ID)*/
 		 try {
 
-                
+               
                 String  name, gtype, age, address, napp ;
 		
 			 
