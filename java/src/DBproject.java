@@ -358,7 +358,7 @@ public class DBproject{
 			 System.out.println("======executeQueryAndPrintResult====="); 
 		System.out.println(esql.executeQueryAndPrintResult("select max(patient_id) from patient;"));
 			  System.out.println("======getCurrSeqVal====="); 
-			 System.out.println(esql.getCurrSeqVal(patient.patient_id));
+			 System.out.println(esql.getCurrSeqVal("patient.patient_id"));
 			  System.out.println("==========="); 
 			
 			
