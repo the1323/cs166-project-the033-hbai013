@@ -1,0 +1,119 @@
+
+ssh wch133-43.cs.ucr.edu
+
+git init
+git pull https://github.com/the1323/cs166-project-the033-hbai013.git
+sleep 1
+source ./postgresql/startPostgreSQL.sh
+sleep 1
+source ./postgresql/createPostgreDB.sh
+sleep 3
+mkdir -p ./java/bin
+source ./java/compile.sh
+sleep 1
+cd java/ 
+source ./run.sh
+
+=============================================
+psql -h localhost -p $PGPORT $USER"_DB" < sql/create.sql
+psql -h localhost -p $PGPORT $USER"_DB"
+
+
+source ./postgresql/stopPostgreDB.sh
+
+
+sql Q5
+select * from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id where  adate between '2011/1/1' and '2022/1/1'  and doctor_id = 25 and (status = 'AC' or status = 'AV');
+
+
+Q6
+  id=9
+
+select appnt_id  from appointment 
+INNER JOIN 
+has_appointment on appointment.appnt_id =  has_appointment.appt_id 
+INNER JOIN 
+doctor on doctor.doctor_id =has_appointment.doctor_id 
+INNER JOIN 
+department on department.dept_id = doctor.did
+where status = 'AV' AND adate = '2021/8/16' and department.name = 'Dermatology';
+
+
+Q7
+
+d name     av      10
+d name    ac         9
+d name     ps      8
+d name    asd         7
+
+
+Q8
+select distinct(pid), aid from patient, appointment, searches where aid = appnt_id order by pid;
+
+
+select has_appointment.doctor_id, count(has_appointment.doctor_id) from appointment
+INNER JOIN 
+has_appointment on appointment.appnt_id =  has_appointment.appt_id 
+INNER JOIN 
+searches on searches.aid = appointment.appnt_id
+ where status = 'AV' and searches.hid = '0' group by has_appointment.doctor_id order by count desc;
+
+
+select * from appointment
+INNER JOIN 
+has_appointment on appointment.appnt_id =  has_appointment.appt_id 
+ where status = 'PA' order by appnt_id;
+
+
+select count(*) from appointment where status = 'WL';
+
+
+
+
+Q4
+
+doc = 3
+apt = 4
+
+select count(*) from has_appointment where doctor_id = 3 and appt_id = 4;
+
+
+select status from appointment where appnt_id = 4;
+
+
+if av or ac 
+print "availiable give patient details"
+patient_id |  name          | gtype | age |                  address   
+select count(*) from patient where patient_id= 11;
+
+if(true) 
+update patient set number_of_appts = number_of_appts +1 where patient_id = 11
+
+else 
+ INSERT INTO patient (column1, column2, column3, ...)
+VALUES (max(pid)+1, value2, value3, (num = 1)); 
+
+else wl, pa
+invalid re-enter all
+
+case1: AV
+update appointment set status = 'AC where appnt_id = 4';
+
+
+case2: AC
+string aaaaaaaaaaaaaaa
+int apt_id = select max(appnt_id) from appointment;
+ INSERT INTO appointment (column1, column2, column3, ...)
+VALUES (max(pid)+1, value2, value3, (num = 1)); 
+
+INSERT INTO has_appointment (appt_id, doctor_id)
+VALUES (4,3 ); 
+
+INSERT INTO searches ( hid, pid , aid)
+VALUES (0,11,4 ); 
+select hid from department , doctor where department.doctor_id = doctor.doctor_id and doctor.doctor_id =3;
+
+
+
+
+
