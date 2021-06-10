@@ -358,7 +358,8 @@ public class DBproject{
 			 System.out.println("======executeQueryAndPrintResult====="); 
 			 String str = esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0);
 		System.out.println("str: " + str);
-			  
+			  String str +=1;
+			 System.out.println("nstr: " + str);
 			  System.out.println("==========="); 
 			 //String valeur = esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(1);
 			// System.out.println(valeur);
