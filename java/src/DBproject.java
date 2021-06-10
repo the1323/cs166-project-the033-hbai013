@@ -362,8 +362,8 @@ public class DBproject{
 			 System.out.println("nstr: " + str);
 			  System.out.println("==========="); 
 			 
-			 Integer in = Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
-			 System.out.println("nint: " + in);
+			 Integer inn = Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
+			 System.out.println("nint: " + inn);
 			 //String valeur = esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(1);
 			// System.out.println(valeur);
 			System.out.println("==========="); 
