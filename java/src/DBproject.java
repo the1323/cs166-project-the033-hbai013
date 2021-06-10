@@ -359,7 +359,7 @@ public class DBproject{
 		System.out.println(esql.executeQueryAndReturnResult("select max(patient_id) from patient;"));
 			  
 			  System.out.println("==========="); 
-			 System.out.println(esql.executeQueryAndReturnResult("select max(patient_id) from patient;")[1]);
+			 System.out.println(esql.executeQueryAndReturnResult("select max(patient_id) from patient;")[0][1]);
 			System.out.println("==========="); 
 			
 			 
