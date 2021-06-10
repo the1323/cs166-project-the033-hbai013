@@ -402,7 +402,7 @@ public class DBproject{
 		
 		*/
 		 try {
-		Integer appnt_ID = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
+		Integer appnt_ID = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
 		String adate, time_slot;
                 System.out.println("Enter Date");
                 adate = in.readLine();
