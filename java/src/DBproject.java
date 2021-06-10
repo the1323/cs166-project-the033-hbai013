@@ -354,7 +354,17 @@ public class DBproject{
 
                 Integer pid = 1+ esql.executeQuery("select max(patient_id) from patient;");
                 String  name, gtype, age, address, napp ;
-                
+			 System.out.println("======executeQuery=====");
+                System.out.println(esql.executeQuery("select max(patient_id) from patient;"));
+			 System.out.println("======executeQueryAndPrintResult====="); 
+		System.out.println(esql.executeQueryAndPrintResult("select max(patient_id) from patient;"));
+			 
+			
+			 
+			 
+			 
+			 
+			 
                 System.out.println("Enter Patient Name");
                 name = in.readLine();
                 System.out.println("your input for  Patient name: " + name);
