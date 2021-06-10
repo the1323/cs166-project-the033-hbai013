@@ -403,8 +403,8 @@ public class DBproject{
 		*/
 		 try {
 		Integer appnt_ID = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
-
-                System.out.println("Enter adate");
+		String adate, time_slot;
+                System.out.println("Enter Date");
                 adate = in.readLine();
                 System.out.println("Enter time_slot");
                 time_slot = in.readLine();
