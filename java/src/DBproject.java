@@ -352,17 +352,11 @@ public class DBproject{
 		PRIMARY KEY (patient_ID)*/
 		 try {
 
-                Integer pid = 1;
+                
                 String  name, gtype, age, address, napp ;
 		
-			 System.out.println("======executeQueryAndPrintResult====="); 
-			 String str = esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0);
-		System.out.println("str: " + str);
-			  str +=1;
-			 System.out.println("nstr: " + str);
-			  System.out.println("==========="); 
 			 
-			 Integer inn = Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
+			 Integer pid = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
 			 System.out.println("nint: " + inn);
 			 //String valeur = esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(1);
 			// System.out.println(valeur);
