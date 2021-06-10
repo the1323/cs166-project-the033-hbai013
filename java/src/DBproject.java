@@ -357,10 +357,10 @@ public class DBproject{
 		
 			 
 			 Integer pid = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
-			 System.out.println("nint: " + pid);
+			 //System.out.println("nint: " + pid);
 			 //String valeur = esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(1);
 			// System.out.println(valeur);
-			System.out.println("==========="); 
+			//System.out.println("==========="); 
 			
 			 
 			 
@@ -369,27 +369,14 @@ public class DBproject{
 			 
                 System.out.println("Enter Patient Name");
                 name = in.readLine();
-                System.out.println("your input for  Patient name: " + name);
-
                 System.out.println("Enter gender M/F");
-                gtype = in.readLine();
-                System.out.println("your input for  gender: " + gtype);
-
+                gtype = in.readLine();              
                 System.out.println("Enter  age");
-                age = in.readLine();
-                System.out.println("your input for  age: " +  age);
-			 
-		        System.out.println("Enter address");
-                address = in.readLine();
-                System.out.println("your input for  address: " + address);
-			 
-		        System.out.println("Enter number_of_appts");
+                age = in.readLine();        			 
+		System.out.println("Enter address");
+                address = in.readLine();       			 
+		System.out.println("Enter number_of_appts");
                 napp = in.readLine();
-                System.out.println("your input for  number_of_appts: " + napp);
-			 
-	
-		
-
                 String query = "INSERT INTO Patient (patient_ID , name , gtype , age , address , number_of_appts) VALUES ( " + pid + " , '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , " + napp + " );";
                 System.out.println("QUERY: " + query);
                 esql.executeUpdate(query);
@@ -415,28 +402,16 @@ public class DBproject{
 		
 		*/
 		 try {
-
-
-                String appnt_ID , adate, time_slot, status ;
-                System.out.println("Enter appnt_ID");
-                appnt_ID = in.readLine();
-                System.out.println("your input for  appnt_ID: " + appnt_ID);
+		Integer appnt_ID = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
 
                 System.out.println("Enter adate");
                 adate = in.readLine();
-                System.out.println("your input for  adate: " + adate);
-
                 System.out.println("Enter time_slot");
                 time_slot = in.readLine();
-                System.out.println("your input for  time_slot: " + time_slot);
-
-                System.out.println("Enter status");
-                status = in.readLine();
-                System.out.println("your input for status: " +  status);
-	
-		
-
-                String query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + adate + "' , '" + time_slot + "' , '" + status + "' );";
+                //System.out.println("Enter status");
+                //status = in.readLine();
+		System.out.println("New Appointment: ID: " + appnt_ID + " Date: " + adate + " time slot: "+ time_slot + " Status: AV");
+                String query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + adate + "' , '" + time_slot + "' , '" + "AV" + "' );";
                 esql.executeUpdate(query);
                 }
                 catch (Exception e){
