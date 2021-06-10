@@ -352,13 +352,15 @@ public class DBproject{
 		PRIMARY KEY (patient_ID)*/
 		 try {
 
-                Integer pid = 1+ esql.executeQuery("select max(patient_id) from patient;");
+                Integer pid = 1;
                 String  name, gtype, age, address, napp ;
-			 System.out.println("======executeQuery=====");
-                System.out.println(esql.executeQuery("select max(patient_id) from patient;"));
+		
 			 System.out.println("======executeQueryAndPrintResult====="); 
 		System.out.println(esql.executeQueryAndPrintResult("select max(patient_id) from patient;"));
-			 
+			  System.out.println("======getCurrSeqVal====="); 
+			 System.out.println(esql.getCurrSeqVal(patient.patient_id));
+			  System.out.println("==========="); 
+			
 			
 			 
 			 
