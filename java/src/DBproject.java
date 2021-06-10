@@ -356,11 +356,11 @@ public class DBproject{
                 String  name, gtype, age, address, napp ;
 		
 			 System.out.println("======executeQueryAndPrintResult====="); 
-		System.out.println(esql.executeQueryAndPrintResult("select max(patient_id) from patient;"));
-			  System.out.println("======getCurrSeqVal====="); 
-			 System.out.println(esql.getCurrSeqVal("patient.patient_id"));
+		System.out.println(esql.executeQueryAndReturnResult("select max(patient_id) from patient;"));
+			  
 			  System.out.println("==========="); 
-			
+			 System.out.println(esql.executeQueryAndReturnResult("select max(patient_id) from patient;")[1]);
+			System.out.println("==========="); 
 			
 			 
 			 
