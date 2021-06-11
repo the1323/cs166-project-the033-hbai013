@@ -428,13 +428,7 @@ public class DBproject{
                 doctor_id = in.readLine();	 
                 System.out.println("Enter Appointment ID:");
                 appt_id = in.readLine();
-			 
-			 
-                System.out.println("Enter End Date");
-                date2 += in.readLine();
-                
-		date1 += "'";
-		date2 += "'";
+
 		System.out.println("ddd : " + doctor_id + " aaa: " + appt_id);
                 String query = "select count(*) from has_appointment where doctor_id = " + doctor_id + " and appt_id = " + appt_id + " ;";
 		Integer foundID = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0
