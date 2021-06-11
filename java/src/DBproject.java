@@ -428,7 +428,7 @@ public class DBproject{
 		//select * from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id where  adate between '2011/1/1' and '2022/1/1'  and doctor_id = 25 and (status = 'AC' or status = 'AV');
 		
 		 try {
-		Integer doctor_id;
+		String doctor_id;
 		String date1, date2;
 		System.out.println("Enter Doctor ID:");
                 doctor_id = in.readLine();	 
