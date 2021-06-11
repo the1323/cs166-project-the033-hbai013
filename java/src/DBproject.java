@@ -459,13 +459,13 @@ public class DBproject{
 		
 		 try {
 		String date, name;
-		date = "'";
+		date = name = "'";
 		System.out.println("Enter Date:");
                 date += in.readLine();	 
                 System.out.println("Enter Department Name:");
                 name = in.readLine();
 		date += "'";
-
+		name += "'";
 		System.out.println("Available Appointments Of Department : " + name + " Date: " + date);
                 String query = "select appnt_id, adate, time_slot, status from appointment INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id INNER JOIN doctor on doctor.doctor_id =has_appointment.doctor_id INNER JOIN department on department.dept_id = doctor.did where status = 'AV' AND adate = " + date + " and department.name = " + name + ";";
 
