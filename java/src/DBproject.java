@@ -476,8 +476,6 @@ public class DBproject {
                     }
                     if (foundstatus.equals("AC")) {// insert new appt, hasappt
                         Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
-                        query = "INSERT INTO has_appointment (appt_id, doctor_id) VALUES ( " + appnt_ID + " , " + doctor_id + " ); ";
-                        esql.executeUpdate(query);
 
 
                         String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(1));
@@ -487,6 +485,12 @@ public class DBproject {
                         System.out.println("atime " + gettime);
                         query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + getadate + "' , '" + gettime + "' , '" + "WL" + "' );";
                         esql.executeUpdate(query);
+
+                        query = "INSERT INTO has_appointment (appt_id, doctor_id) VALUES ( " + appnt_ID + " , " + doctor_id + " ); ";
+                        esql.executeUpdate(query);
+
+
+
 
                     }
 
