@@ -480,10 +480,10 @@ public class DBproject {
                         Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
                         System.out.println("appnid: " + appnt_ID);
 
-                        String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(1));
+                        String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
                         System.out.println("adate " + getadate);
-                        String gettime = (esql.executeQueryAndReturnResult("select time_slot from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(2));
-                        
+                        String gettime = (esql.executeQueryAndReturnResult("select time_slot from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
+
                         System.out.println("atime " + gettime);
                         query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + getadate + "' , '" + gettime + "' , '" + "WL" + "' );";
                         esql.executeUpdate(query);
