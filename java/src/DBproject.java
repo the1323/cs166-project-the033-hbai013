@@ -438,7 +438,7 @@ public class DBproject{
 			 
 		if( foundID == 1) { // found docid appt id, continue patient details
 		String foundstatus = (esql.executeQueryAndReturnResult(query).get(0).get(0)); //check av ac ok, wl pa not ok
-		if( foundstatus.equal("AV" || "AC")){ // can make appt
+		if( foundstatus.equal("AV") || foundstatus.equal("AC")){ // can make appt
 		System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
 		patient_id = in.readLine();	
 		System.out.println("Enter Gender as 'M/F':");
