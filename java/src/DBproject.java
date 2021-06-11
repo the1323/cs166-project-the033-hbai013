@@ -437,12 +437,12 @@ public class DBproject{
 		date2 += "'";
 		System.out.println("ddd : " + doctor_id + " aaa: " + appt_id);
                 String query = "select count(*) from has_appointment where doctor_id = " + doctor_id + " and appt_id = " + appt_id + " ;";
-		Boolean foundID = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0
+		Integer foundID = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0
 		System.out.println("bool: " + foundID);
 		System.out.println(esql.executeQueryAndReturnResult(query));
 			 
 			 
-		if( foundID) { // found docid appt id, continue patient details
+		if( foundID == 1) { // found docid appt id, continue patient details
 		//String foundstatus = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0select status from appointment where appnt_id = 4;	
 			
 		System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
