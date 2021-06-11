@@ -479,6 +479,7 @@ public class DBproject {
                         System.out.println("status is ac change to wl ");
                         Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
                         System.out.println("appnid: " + appnt_ID);
+                        System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
 
                         String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
                         System.out.println("adate " + getadate);
