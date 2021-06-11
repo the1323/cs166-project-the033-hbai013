@@ -506,19 +506,14 @@ public class DBproject{
 		// Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
 		
 		 try {
-		String status;
-		date1 = date2 = "'";
+		String status = "'" ;
 		System.out.println("Enter Doctor ID:");
-                doctor_id = in.readLine();	 
-                System.out.println("Enter Start Date");
-                date1 += in.readLine();
-                System.out.println("Enter End Date");
-                date2 += in.readLine();
+                status += in.readLine();	 
                 
-		date1 += "'";
-		date2 += "'";
-		System.out.println("Looking for appointment for DocID : " + doctor_id + " Date Range: " + date1 + " - "+ date2);
-                String query = "      ";
+                
+		status += "'";
+		System.out.println("Looking for Patients Count per doctor With Status : " + status);
+                String query = "select has_appointment.doctor_id, doctor.name, count(has_appointment.doctor_id) as Num_of_Patient from appointment INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id INNER JOIN doctor on doctor.doctor_id =  has_appointment.doctor_id INNER JOIN searches on searches.aid = appointment.appnt_id where status = " + status + " and searches.hid = '0' group by has_appointment.doctor_id, doctor.name order by Num_of_Patient  desc;";
 
 		System.out.println(esql.executeQueryAndPrintResult(query));
                 }
