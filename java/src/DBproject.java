@@ -441,7 +441,7 @@ public class DBproject{
 		date1 += "'";
 		date2 += "'";
 		System.out.println("Looking for appointment for DocID : " + doctor_id + " Date Range: " + date1 + " - "+ date2);
-                String query = "select appnt_id, adate, time_slot, status from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id where adate between" + date1 + "and" + date2 + "and doctor_id = " + doctor_id + "and (status = 'AC' or status = 'AV');";
+                String query = "select appnt_id, adate, time_slot, status from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id where adate between " + date1 + " and " + date2 + " and doctor_id = " + doctor_id + "and (status = 'AC' or status = 'AV');";
                 System.out.println(esql.executeQueryAndReturnResult(query));
                 }
                 catch (Exception e){
