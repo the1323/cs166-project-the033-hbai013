@@ -463,7 +463,7 @@ public class DBproject{
 		System.out.println("Enter Date:");
                 date += in.readLine();	 
                 System.out.println("Enter Department Name:");
-                name = in.readLine();
+                name += in.readLine();
 		date += "'";
 		name += "'";
 		System.out.println("Available Appointments Of Department : " + name + " Date: " + date);
@@ -504,5 +504,29 @@ public class DBproject{
 	
 	public static void FindPatientsCountWithStatus(DBproject esql) {//8
 		// Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
+		
+		 try {
+		String status;
+		date1 = date2 = "'";
+		System.out.println("Enter Doctor ID:");
+                doctor_id = in.readLine();	 
+                System.out.println("Enter Start Date");
+                date1 += in.readLine();
+                System.out.println("Enter End Date");
+                date2 += in.readLine();
+                
+		date1 += "'";
+		date2 += "'";
+		System.out.println("Looking for appointment for DocID : " + doctor_id + " Date Range: " + date1 + " - "+ date2);
+                String query = "      ";
+
+		System.out.println(esql.executeQueryAndPrintResult(query));
+                }
+                catch (Exception e){
+
+                System.err.println (e.getMessage());
+
+
+                }
 	}
 }
