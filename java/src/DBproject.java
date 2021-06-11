@@ -437,8 +437,8 @@ public class DBproject{
 			 
 			 
 		if( foundID == 1) { // found docid appt id, continue patient details
-		//String foundstatus = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0select status from appointment where appnt_id = 4;	
-			
+		String foundstatus = (esql.executeQueryAndReturnResult(query).get(0).get(0)); //check av ac ok, wl pa not ok
+		if( foundstatus.equal("AV" || "AC"){ // can make appt
 		System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
 		patient_id = in.readLine();	
 		System.out.println("Enter Gender as 'M/F':");
@@ -448,12 +448,28 @@ public class DBproject{
 		System.out.println("Enter address: ");
 		address = in.readLine();	
 		if(patient_id.equals("x")){ //new patient
-			System.out.println("new patientxxxxxx ");
+		System.out.println("welcome new patient ");
+		Integer npid = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
+		System.out.println("npid " + npid);
+		String query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + npid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
+                esql.executeUpdate(query); //insert new patient
+		//add appt waitlist
+			
+	
 		}	
 		else { //old patient 
-		//patient_id |         name          | gtype | age |                  address                   | number_of_appts
+		//patient_id,  name, gtype, age, address ,number_of_appts
 		System.out.println("is the info above yours? ");
-		}	
+		}
+			
+		
+		}
+		else{// wl or pa 
+			
+		System.out.println("Appointment is Not available ");
+		return;
+		}
+			
 			
 			
 		}
@@ -462,7 +478,7 @@ public class DBproject{
 		return;
 		}
 		
-                }
+                }//try
                 catch (Exception e){
 
                 System.err.println (e.getMessage());
