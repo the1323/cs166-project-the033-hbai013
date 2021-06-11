@@ -441,6 +441,8 @@ public class DBproject{
 		if( foundstatus.equals("AV") || foundstatus.equals("AC")){ // can make appt
 		System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
 		patient_id = in.readLine();	
+		System.out.println("Enter name:");
+		name = in.readLine();	
 		System.out.println("Enter Gender as 'M/F':");
 		gtype = in.readLine();	
 		System.out.println("Enter age: ");
