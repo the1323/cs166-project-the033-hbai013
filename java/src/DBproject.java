@@ -453,7 +453,7 @@ public class DBproject{
 		age = in.readLine();	
 		System.out.println("Enter address: ");
 		address = in.readLine();	
-		if(patient_id.equals("x"){ //new patient
+		if(patient_id.equals("x")){ //new patient
 			System.out.println("new patientxxxxxx ");
 		}	
 		else { //old patient 
