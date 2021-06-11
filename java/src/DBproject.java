@@ -437,8 +437,9 @@ public class DBproject{
 			 
 			 
 		if( foundID == 1) { // found docid appt id, continue patient details
-		String foundstatus = (esql.executeQueryAndReturnResult(query).get(0).get(0)); //check av ac ok, wl pa not ok
+		String foundstatus = (esql.executeQueryAndReturnResult("select status from appointment where appnt_id = " + appt_id + " ;").get(0).get(0)); //check av ac ok, wl pa not ok
 		if( foundstatus.equals("AV") || foundstatus.equals("AC")){ // can make appt
+		System.out.println("status: " + foundstatus);
 		System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
 		patient_id = in.readLine();	
 		System.out.println("Enter name:");
