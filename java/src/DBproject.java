@@ -434,9 +434,9 @@ public class DBproject{
 		System.out.println("Enter Doctor ID:");
                 doctor_id = in.readLine();	 
                 System.out.println("Enter Start Date");
-                date1 = in.readLine();
+                date1 += in.readLine();
                 System.out.println("Enter End Date");
-                date2 = in.readLine();
+                date2 += in.readLine();
                 
 		date1 += "'";
 		date2 += "'";
