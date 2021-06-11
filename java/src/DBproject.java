@@ -427,6 +427,27 @@ public class DBproject{
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
 		//select * from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id where  adate between '2011/1/1' and '2022/1/1'  and doctor_id = 25 and (status = 'AC' or status = 'AV');
 		
+		 try {
+		Integer doctor_id;
+		String date1, date2;
+		System.out.println("Enter Doctor ID:");
+                doctor_id = in.readLine();	 
+                System.out.println("Enter Start Date");
+                date1 = in.readLine();
+                System.out.println("Enter End Date");
+                date2 = in.readLine();
+                
+		System.out.println("Looking for appointment for DocID : " + doctor_id + " Date Range: " + date1 + " - "+ date2);
+                String query = "select appnt_id, adate, time_slot, status from appointment  INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id 
+			where  adate between" + date1 + "and" + date2 + "and doctor_id = " + doctor_id + "and (status = 'AC' or status = 'AV');";
+                esql.executeUpdate(query);
+                }
+                catch (Exception e){
+
+                System.err.println (e.getMessage());
+
+
+                }
 		
 	}
 
