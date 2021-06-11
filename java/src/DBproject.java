@@ -458,6 +458,7 @@ public class DBproject {
                     age = in.readLine();
                     System.out.println("Enter address: ");
                     address = in.readLine();
+
                     if (patient_id.equals("x")) { //new patient
                         System.out.println("welcome new patient ");
                         Integer npid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
@@ -469,21 +470,22 @@ public class DBproject {
                         System.out.println("is the info above yours? ");
                     }
                     if (foundstatus.equals("AV")) {//update appt
+                        Integer npid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
                         query = "update appointment set status = 'AC' where appnt_id = " + npid + " ;";
                         esql.executeUpdate(query);
                     }
                     if (foundstatus.equals("AC")) {// insert new appt, hasappt
-                        appt_id = Integer.parseInt(appt_id) + 1;
-                        query = "INSERT INTO has_appointment (appt_id, doctor_id) VALUES ( " + appt_id + " , " + doctor_id + " ); ";
+                        Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
+                        query = "INSERT INTO has_appointment (appt_id, doctor_id) VALUES ( " + appnt_ID + " , " + doctor_id + " ); ";
                         esql.executeUpdate(query);
 
-                        Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
-                        String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appt_id + " ;").get(0).get(1));
-                        String gettime = (esql.executeQueryAndReturnResult("select time_slot from appointment where appnt_id = " + appt_id + " ;").get(0).get(2));
+
+                        String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(1));
+                        String gettime = (esql.executeQueryAndReturnResult("select time_slot from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(2));
                         System.out.println("appn " + appnt_ID);
-                        System.out.println("adate " + adate);
-                        System.out.println("atime " + time_slot);
-                        query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + adate + "' , '" + time_slot + "' , '" + "WL" + "' );";
+                        System.out.println("adate " + getadate);
+                        System.out.println("atime " + gettime);
+                        query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + getadate + "' , '" + gettime + "' , '" + "WL" + "' );";
                         esql.executeUpdate(query);
 
                     }
