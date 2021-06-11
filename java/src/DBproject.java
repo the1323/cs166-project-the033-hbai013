@@ -421,6 +421,61 @@ public class DBproject{
 	public static void MakeAppointment(DBproject esql) {//4
 		//
 		// Given a patient, a doctor and an appointment of the doctor that s/he wants to take, add an appointment to the DB
+		 try {
+		String doctor_id, appt_id;
+		String patient_id , name, gtype, age , address;
+		System.out.println("Enter Doctor ID:");
+                doctor_id = in.readLine();	 
+                System.out.println("Enter Appointment ID:");
+                appt_id = in.readLine();
+			 
+			 
+                System.out.println("Enter End Date");
+                date2 += in.readLine();
+                
+		date1 += "'";
+		date2 += "'";
+		System.out.println("ddd : " + doctor_id + " aaa: " + appt_id);
+                String query = "select count(*) from has_appointment where doctor_id = " + doctor_id + " and appt_id = " + appt_id + " ;";
+		Boolean foundID = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0
+		System.out.println("bool: " + foundID);
+		System.out.println(esql.executeQueryAndReturnResult(query));
+			 
+			 
+		if( foundID) { // found docid appt id, continue patient details
+		//String foundstatus = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0select status from appointment where appnt_id = 4;	
+			
+		System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
+		patient_id = in.readLine();	
+		System.out.println("Enter Gender as 'M/F':");
+		gtype = in.readLine();	
+		System.out.println("Enter age: ");
+		age = in.readLine();	
+		System.out.println("Enter address: ");
+		address = in.readLine();	
+		if(patient_id.equals("x"){ //new patient
+			System.out.println("new patientxxxxxx ");
+		}	
+		else { //old patient 
+		//patient_id |         name          | gtype | age |                  address                   | number_of_appts
+		System.out.println("is the info above yours? ");
+		}	
+			
+			
+		}
+		else {
+		System.out.println("Appointment ID or Doctor ID not found ");
+		return;
+		}
+		
+                }
+                catch (Exception e){
+
+                System.err.println (e.getMessage());
+
+
+                }
+		
 	}
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
