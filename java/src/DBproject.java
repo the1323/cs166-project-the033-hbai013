@@ -507,7 +507,7 @@ public class DBproject{
 		
 		 try {
 		String status = "'" ;
-		System.out.println("Enter Doctor ID:");
+		System.out.println("Enter Status:");
                 status += in.readLine();	 
                 
                 
