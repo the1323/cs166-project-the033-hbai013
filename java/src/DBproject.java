@@ -402,7 +402,6 @@ public class DBproject {
 		time_slot VARCHAR(11),
 		status _STATUS,
 		PRIMARY KEY (appnt_ID)
-
 		*/
         try {
             Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
@@ -465,11 +464,10 @@ public class DBproject {
                         System.out.println("npid " + npid);
                         query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + npid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
                         esql.executeUpdate(query); //insert new patient
+                    } else { //old patient
+                        //patient_id,  name, gtype, age, address ,number_of_appts
+                        System.out.println("is the info above yours? ");
                     }
-		else { //old patient
-                    //patient_id,  name, gtype, age, address ,number_of_appts
-                    System.out.println("is the info above yours? ");
-                }
                     if (foundstatus.equals("AV")) {//update appt
                         query = "update appointment set status = 'AC' where appnt_id = " + npid + " ;";
                         esql.executeUpdate(query);
@@ -490,34 +488,26 @@ public class DBproject {
 
                     }
 
-                } 
+                } else {// wl or pa
 
-
-            } else {// wl or pa
-
-                System.out.println("Appointment is Not available ");
+                    System.out.println("Appointment is Not available ");
+                    return;
+                }
+            } else { // if appt or doc count =0
+                System.out.println("Appointment ID or Doctor ID not found ");
                 return;
             }
 
+        }//try
+        catch (
+                Exception e) {
+
+            System.err.println(e.getMessage());
+
 
         }
-		else{
-            System.out.println("Appointment ID or Doctor ID not found ");
-            return;
-        }
-
-    }//try
-                catch(
-    Exception e)
-
-    {
-
-        System.err.println(e.getMessage());
-
 
     }
-
-}
 
     public static void ListAppointmentsOfDoctor(DBproject esql) {//5
         // For a doctor ID and a date range, find the list of active and available appointments of the doctor
