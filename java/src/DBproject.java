@@ -451,7 +451,7 @@ public class DBproject{
 		System.out.println("welcome new patient ");
 		Integer npid = 1+ Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
 		System.out.println("npid " + npid);
-		String query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + npid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
+		query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + npid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
                 esql.executeUpdate(query); //insert new patient
 		//add appt waitlist
 			
