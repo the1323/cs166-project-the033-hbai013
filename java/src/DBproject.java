@@ -551,8 +551,16 @@ public class DBproject {
             String patient_id, name, gtype, age, address;
             System.out.println("Enter Doctor ID:");
             doctor_id = in.readLine();
+            while(!checkint(doctor_id)){
+                System.out.println("Invalid Input, Try Again.");
+                doctor_id = in.readLine();
+            }
             System.out.println("Enter Appointment ID:");
             appt_id = in.readLine();
+            while(!checkint(appt_id)){
+                System.out.println("Invalid Input, Try Again.");
+                appt_id = in.readLine();
+            }
 
             System.out.println("ddd : " + doctor_id + " aaa: " + appt_id);
             String query = "select count(*) from has_appointment where doctor_id = " + doctor_id + " and appt_id = " + appt_id + " ;";
@@ -627,9 +635,13 @@ public class DBproject {
                         System.out.println("appnid: " + appnt_ID);
                         //System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
                         ///////////////////////////////////////////////////////////
-                        String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
+                        query = "select adate from appointment where appnt_id = " + appt_id + " ;";
+                        System.out.println("get date from old: " + query);
+                        String getadate = esql.executeQueryAndReturnResult(query).get(0).get(0);
                         System.out.println("adate " + getadate);
-                        String gettime = (esql.executeQueryAndReturnResult("select time_slot from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
+                        query ="select time_slot from appointment where appnt_id = " + appt_id + " ;";
+                        System.out.println("get time from old: " + query);
+                        String gettime = (esql.executeQueryAndReturnResult(query).get(0).get(0));
 
                         System.out.println("atime " + gettime);
                         query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + getadate + "' , '" + gettime + "' , '" + "WL" + "' );";
