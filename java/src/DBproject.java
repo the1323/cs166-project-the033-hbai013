@@ -567,7 +567,10 @@ public class DBproject {
                     System.out.println("status: " + foundstatus);
                     System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
                     patient_id = in.readLine();
-                    while(!checkint(patient_id) || patient_id!="x"){
+                    while(!checkint(patient_id) ){
+                        if (patient_id == "x") {
+                            break;
+                        }
                         System.out.println("Invalid Input, Try Again.");
                         patient_id = in.readLine();
                     }
