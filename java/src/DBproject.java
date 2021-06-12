@@ -568,7 +568,7 @@ public class DBproject {
                     System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
                     patient_id = in.readLine();
                     System.out.println("xxxxxx.: "  + patient_id);
-                    if (patient_id != "x") {
+                    if (!patient_id.equals("x") ) {
                         while(!checkint(patient_id) ){
 
                             System.out.println("Invalid Input, Try Again.");
