@@ -567,6 +567,7 @@ public class DBproject {
                     System.out.println("status: " + foundstatus);
                     System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
                     patient_id = in.readLine();
+                    System.out.println("xxxxxx.: "  + patient_id);
                     while(!checkint(patient_id) ){
                         if (patient_id == "x") {
                             break;
@@ -621,7 +622,7 @@ public class DBproject {
                         esql.executeUpdate(query);
                     }
                     if (foundstatus.equals("AC")) {// insert new appt, hasappt
-                        System.out.println("status is ac change to wl ");
+                        System.out.println("status is ac add new wl ");
                         Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
                         System.out.println("appnid: " + appnt_ID);
                         //System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
