@@ -568,7 +568,7 @@ public class DBproject {
             //System.out.println("FOUND, doctor has appointment.");
             //System.out.println(esql.executeQueryAndReturnResult(query));
 
-            Integer newpid;
+
             if (foundID == 1) { // found docid appt id, continue patient details
                 String foundstatus = (esql.executeQueryAndReturnResult("select status from appointment where appnt_id = " + appt_id + " ;").get(0).get(0)); //check av ac ok, wl pa not ok
                 if (foundstatus.equals("AV") || foundstatus.equals("AC")) { // can make appt
@@ -603,6 +603,7 @@ public class DBproject {
                     }
                     System.out.println("Enter address: ");
                     address = in.readLine();
+                    Integer newpid;
                     if (patient_id.equals("x")) { //new patient
 
                         System.out.println("Welcome new patient!");
@@ -610,7 +611,7 @@ public class DBproject {
                         newpid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0));
                         //System.out.println("npid " + newpid);
                         query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + newpid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
-                        System.out.println("insert new pat: " + query);
+                        //System.out.println("insert new pat: " + query);
                         esql.executeUpdate(query); //insert new patient
                     } else { //old patient
                         String temp = "select * from patient where patient_id = " + patient_id;
