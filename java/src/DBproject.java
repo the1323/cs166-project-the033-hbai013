@@ -473,10 +473,10 @@ public class DBproject {
                 name = in.readLine();
             }
             System.out.println("Enter gender M/F");
-            gtype = in.readLine();
+            gtype = in.readLine().toUpperCase();
             while(!gtype.toUpperCase().equals("M") && !gtype.toUpperCase().equals("F")){
                 System.out.println("Invalid Input, Try Again.");
-                gtype = in.readLine();
+                gtype = in.readLine().toUpperCase();
             }
             System.out.println("Enter  age");
             age = in.readLine();
@@ -707,7 +707,7 @@ public class DBproject {
         // For a department name and a specific date, find the list of available appointments of the department
 
         try {
-            String date, name;
+            String date, name, name1;
             date = name = "'";
             System.out.println("Enter Date (YYYY/MM/DD) :");
             String temp2 = in.readLine();
@@ -717,11 +717,12 @@ public class DBproject {
             }
             date += temp2;
             System.out.println("Enter Department Name:");
-            name += in.readLine();
-            while(!checkname(name)){
+            name1 = in.readLine();
+            while(!checkname(name1)){
                 System.out.println("Invalid Input, Try Again.");
-                name= in.readLine();
+                name1= in.readLine();
             }
+            name+=name1;
             date += "'";
             name += "'";
             System.out.println("Available Appointments Of Department : " + name + " Date: " + date);
