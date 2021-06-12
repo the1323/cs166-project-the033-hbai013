@@ -562,20 +562,20 @@ public class DBproject {
                 appt_id = in.readLine();
             }
 
-            System.out.println("ddd : " + doctor_id + " aaa: " + appt_id);
+            //System.out.println("ddd : " + doctor_id + " aaa: " + appt_id);
             String query = "select count(*) from has_appointment where doctor_id = " + doctor_id + " and appt_id = " + appt_id + " ;";
             Integer foundID = Integer.parseInt(esql.executeQueryAndReturnResult(query).get(0).get(0)); //check if count row = 0
-            System.out.println("bool: " + foundID);
-            System.out.println(esql.executeQueryAndReturnResult(query));
+            //System.out.println("FOUND, doctor has appointment.");
+            //System.out.println(esql.executeQueryAndReturnResult(query));
 
             Integer newpid;
             if (foundID == 1) { // found docid appt id, continue patient details
                 String foundstatus = (esql.executeQueryAndReturnResult("select status from appointment where appnt_id = " + appt_id + " ;").get(0).get(0)); //check av ac ok, wl pa not ok
                 if (foundstatus.equals("AV") || foundstatus.equals("AC")) { // can make appt
-                    System.out.println("status: " + foundstatus);
+                    //System.out.println("status: " + foundstatus);
                     System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
                     patient_id = in.readLine();
-                    System.out.println("xxxxxx.: "  + patient_id);
+                    //System.out.println("xxxxxx.: "  + patient_id);
                     if (!patient_id.equals("x") ) {
                         while(!checkint(patient_id) ){
 
@@ -590,10 +590,10 @@ public class DBproject {
                         name = in.readLine();
                     }
                     System.out.println("Enter Gender as 'M/F':");
-                    gtype = in.readLine();
+                    gtype = in.readLine().toUpperCase();
                     while(!gtype.toUpperCase().equals("M") && !gtype.toUpperCase().equals("F")){
                         System.out.println("Invalid Input, Try Again.");
-                        gtype = in.readLine();
+                        gtype = in.readLine().toUpperCase();
                     }
                     System.out.println("Enter age: ");
                     age = in.readLine();
@@ -605,7 +605,7 @@ public class DBproject {
                     address = in.readLine();
                     if (patient_id.equals("x")) { //new patient
 
-                        System.out.println("welcome new patient ");
+                        System.out.println("Welcome new patient!");
                         newpid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
                         System.out.println("npid " + newpid);
                         query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + newpid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
@@ -624,23 +624,29 @@ public class DBproject {
 
                     }
                     if (foundstatus.equals("AV")) {//update appt
-                        System.out.println("status is av change to ac ");
+                        System.out.println("status is Available, update status to Active");
                         //Integer npid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
                         query = "update appointment set status = 'AC' where appnt_id = " + newpid + " ;";
                         esql.executeUpdate(query);
+                        System.out.println("Your Appointment is: ");
+                        query = "select * from appointment where appnt_id = " + newpid + " ;";
+                        System.out.println(esql.executeQueryAndPrintResult(query));
+
+
                     }
                     if (foundstatus.equals("AC")) {// insert new appt, hasappt
-                        System.out.println("status is ac add new wl ");
+
                         Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
-                        System.out.println("appnid: " + appnt_ID);
+                        //System.out.println("appnid: " + appnt_ID);
+                        System.out.println("The appointment is Active, new appointment added with appointment ID: " + appnt_ID + " Status: WL" );
                         //System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
                         ///////////////////////////////////////////////////////////
                         //query = "select adate from appointment where appnt_id = " + appt_id + " ;";
-                        System.out.println("get date from old: " + query);
+                        //System.out.println("get date from old: " + query);
                         String getadate = esql.executeQueryAndReturnResult(query).get(0).get(0);
-                        System.out.println("adate " + getadate);
+                        //System.out.println("adate " + getadate);
                         //query ="select time_slot from appointment where appnt_id = " + appt_id + " ;";
-                        System.out.println("get time from old: " + query);
+                        //System.out.println("get time from old: " + query);
                         String gettime = (esql.executeQueryAndReturnResult(query).get(0).get(0));
 
                         //System.out.println("atime " + gettime);
@@ -649,6 +655,9 @@ public class DBproject {
 
                         query = "INSERT INTO has_appointment (appt_id, doctor_id) VALUES ( " + appnt_ID + " , " + doctor_id + " ); ";
                         esql.executeUpdate(query);
+                        System.out.println("Your Appointment is: ");
+                        query = "select * from appointment where appnt_id = " + appnt_ID + " ;";
+                        System.out.println(esql.executeQueryAndPrintResult(query));
 
 
 
