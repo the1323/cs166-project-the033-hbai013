@@ -391,7 +391,8 @@ public class DBproject {
 
     public static boolean checkname( String s ) {
         for ( int i =0;i<s.length();i++){
-            if(Character.toUpperCase(s.charAt(i))>90 || Character.toUpperCase(s.charAt(i))<65 ) return false;
+            if(Character.toUpperCase(s.charAt(i)) !=32){
+            if(Character.toUpperCase(s.charAt(i))>90 || Character.toUpperCase(s.charAt(i))<65 ) return false;}
         }
 
         return true;
