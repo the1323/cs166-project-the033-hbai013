@@ -635,15 +635,15 @@ public class DBproject {
                         System.out.println("appnid: " + appnt_ID);
                         //System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
                         ///////////////////////////////////////////////////////////
-                        query = "select adate from appointment where appnt_id = " + appt_id + " ;";
+                        //query = "select adate from appointment where appnt_id = " + appt_id + " ;";
                         System.out.println("get date from old: " + query);
                         String getadate = esql.executeQueryAndReturnResult(query).get(0).get(0);
                         System.out.println("adate " + getadate);
-                        query ="select time_slot from appointment where appnt_id = " + appt_id + " ;";
+                        //query ="select time_slot from appointment where appnt_id = " + appt_id + " ;";
                         System.out.println("get time from old: " + query);
                         String gettime = (esql.executeQueryAndReturnResult(query).get(0).get(0));
 
-                        System.out.println("atime " + gettime);
+                        //System.out.println("atime " + gettime);
                         query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + getadate + "' , '" + gettime + "' , '" + "WL" + "' );";
                         esql.executeUpdate(query);
 
