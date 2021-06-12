@@ -1,4 +1,7 @@
 # cs166-project-the033-hbai013
+# CS166 Hospital Database Management System
+Authors: [Tongyuan He](https://github.com/the1323),  [Haotong Bai](https://github.com/stephenbai0218
+)
 
 Init envirement : 
 
