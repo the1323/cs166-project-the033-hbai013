@@ -37,6 +37,7 @@ public class DBproject {
     public DBproject(String dbname, String dbport, String user, String passwd) throws SQLException {
         System.out.print("Connecting to database...");
         try {
+
             // constructs the connection URL
             String url = "jdbc:postgresql://localhost:" + dbport + "/" + dbname;
             System.out.println("Connection URL: " + url + "\n");
@@ -313,7 +314,88 @@ public class DBproject {
         } while (true);
         return input;
     }//end readChoice
+    public static boolean checkint( String s ) {
+        int ascii = (int)s.charAt(0);
+        //System.out.println("castAscii " + ascii);
+        if(ascii<48 || ascii>57) {
+            return false;
+        }
+        Long i = Long.parseLong(s);
+        if(i>2147483647 || i<0) {
+            return false;
+        }
+        return true;
+    }
+    public static boolean checkage( String s ) {
+        int ascii = (int)s.charAt(0);
+        //System.out.println("castAscii " + ascii);
+        if(ascii<48 || ascii>57) {
+            return false;
+        }
+        Long i = Long.parseLong(s);
+        if(i>150 || i<0) {
+            return false;
+        }
+        return true;
+    }
+    public static boolean checkstatus( String s ) {
+        if(s.equals("AV") || s.equals("AC") || s.equals("WL") || s.equals("PA") )return true;
+        return false;
+    }
+    public static boolean checkdate( String s ) {
+        //yyyy/mm/dd
+        if( s.length() != 10) return false;
+        if (s.charAt(4) != '/' || s.charAt(7) != '/' ) {
+            return false;
+        }
+        for ( int i =0;i<4;i++){ //yyyy
+            int ascii = (int)s.charAt(i);
+            if(ascii<48 || ascii>57)return false;
+        }
+        for ( int i =5;i<7;i++){ //mm
+            int ascii = (int)s.charAt(i);
+            if(ascii<48 || ascii>57)return false;
+        }
+        for ( int i =8;i<10;i++){ //dd
+            int ascii = (int)s.charAt(i);
+            if(ascii<48 || ascii>57)return false;
+        }
+        String year = s.substring(0,4);
+        if(Integer.parseInt(s.substring(0,4)) > 3000 ||Integer.parseInt(s.substring(0,4)) < 1911) return false;
+        //System.out.println("year " + year );
+        String mon = s.substring(5,7);
+        // System.out.println("mmm " + mon );
+        if(Integer.parseInt(s.substring(5,7)) > 12 ||Integer.parseInt(s.substring(5,7)) < 1) return false;
+        String day = s.substring(8,10);
+        //System.out.println("dddd " + day );
+        if(Integer.parseInt(s.substring(8,10)) > 31 ||Integer.parseInt(s.substring(8,10)) < 1) return false;
 
+        return true;
+    }
+    public static boolean checktime( String s ) {
+        //08:00-10:00
+        if ( s.length() !=11) return false;
+        if( s.charAt(2)!= ':' || s.charAt(5)!= '-' || s.charAt(8)!= ':' ) return false;
+        for ( int i =0;i<11;i++){
+
+            if( i ==2 ||  i ==5 ||  i ==8  ) i++ ; //skip char
+            int ascii = (int)s.charAt(i);
+            if(ascii<48 || ascii>57)return false;
+        }
+        if(Integer.parseInt(s.substring(0,2)) > 23 ||Integer.parseInt(s.substring(0,2)) <0) return false;
+        if(Integer.parseInt(s.substring(6,8)) > 23 ||Integer.parseInt(s.substring(6,8)) <0) return false;
+        if(Integer.parseInt(s.substring(9,11)) > 59 ||Integer.parseInt(s.substring(9,11)) <0) return false;
+        if(Integer.parseInt(s.substring(3,5)) > 59 ||Integer.parseInt(s.substring(3,5)) <0) return false;
+        return true;
+    }
+
+    public static boolean checkname( String s ) {
+        for ( int i =0;i<s.length();i++){
+            if(Character.toUpperCase(s.charAt(i))>90 || Character.toUpperCase(s.charAt(i))<65 ) return false;
+        }
+
+        return true;
+    }
     public static void AddDoctor(DBproject esql) {//1
         /*
          * doctor_ID INTEGER NOT NULL,
@@ -330,10 +412,23 @@ public class DBproject {
 
             System.out.println("Enter Doctor Name");
             name = in.readLine();
+            while(!checkname(name)){
+                System.out.println("Invalid Input, Try Again.");
+                name = in.readLine();
+            }
             System.out.println("Enter Specialty");
             sp = in.readLine();
+            while(!checkname(sp)){
+                System.out.println("Invalid Input, Try Again.");
+                sp = in.readLine();
+            }
             System.out.println("Enter Department ID");
             did = in.readLine();
+            while(!checkint(did)){
+                System.out.println("Invalid Input, Try Again.");
+                did = in.readLine();
+
+            }
 
 
             System.out.println("New Doctor: ID: " + id + " Name: " + name + " specialty: " + sp + " did: " + did);
@@ -373,14 +468,30 @@ public class DBproject {
 
             System.out.println("Enter Patient Name");
             name = in.readLine();
+            while(!checkname(name)){
+                System.out.println("Invalid Input, Try Again.");
+                name = in.readLine();
+            }
             System.out.println("Enter gender M/F");
             gtype = in.readLine();
+            while(!gtype.toUpperCase().equals("M") && !gtype.toUpperCase().equals("F")){
+                System.out.println("Invalid Input, Try Again.");
+                gtype = in.readLine();
+            }
             System.out.println("Enter  age");
             age = in.readLine();
+            while(!checkage(age)){
+                System.out.println("Invalid Input, Try Again.");
+                age= in.readLine();
+            }
             System.out.println("Enter address");
             address = in.readLine();
             System.out.println("Enter number_of_appts");
             napp = in.readLine();
+            while(!checkint(napp)){
+                System.out.println("Invalid Input, Try Again.");
+                napp = in.readLine();
+            }
             String query = "INSERT INTO Patient (patient_ID , name , gtype , age , address , number_of_appts) VALUES ( " + pid + " , '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , " + napp + " );";
             System.out.println("QUERY: " + query);
             esql.executeUpdate(query);
@@ -406,12 +517,18 @@ public class DBproject {
         try {
             Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
             String adate, time_slot;
-            System.out.println("Enter Date");
+            System.out.println("Enter Date (YYYY/MM/DD):");
             adate = in.readLine();
-            System.out.println("Enter time_slot");
+            while(!checkdate(adate)){
+                System.out.println("Invalid Input, Try Again.");
+                adate = in.readLine();
+            }
+            System.out.println("Enter time_slot (HH:MM-HH:MM):");
             time_slot = in.readLine();
-            //System.out.println("Enter status");
-            //status = in.readLine();
+            while(!checktime(time_slot)){
+                System.out.println("Invalid Input, Try Again.");
+                time_slot = in.readLine();
+            }
             System.out.println("New Appointment: ID: " + appnt_ID + " Date: " + adate + " time slot: " + time_slot + " Status: AV");
             String query = "INSERT INTO appointment (appnt_ID , adate , time_slot , status) VALUES ( " + appnt_ID + " , '" + adate + "' , '" + time_slot + "' , '" + "AV" + "' );";
             esql.executeUpdate(query);
@@ -443,44 +560,69 @@ public class DBproject {
             System.out.println("bool: " + foundID);
             System.out.println(esql.executeQueryAndReturnResult(query));
 
-
+            Integer newpid;
             if (foundID == 1) { // found docid appt id, continue patient details
                 String foundstatus = (esql.executeQueryAndReturnResult("select status from appointment where appnt_id = " + appt_id + " ;").get(0).get(0)); //check av ac ok, wl pa not ok
                 if (foundstatus.equals("AV") || foundstatus.equals("AC")) { // can make appt
                     System.out.println("status: " + foundstatus);
                     System.out.println("Enter Patient Details \n Enter Patient ID (if you are new patient, enter 'x'): ");
                     patient_id = in.readLine();
+                    while(!checkint(patient_id)){
+                        System.out.println("Invalid Input, Try Again.");
+                        patient_id = in.readLine();
+                    }
                     System.out.println("Enter name:");
                     name = in.readLine();
+                    while(!checkname(name)){
+                        System.out.println("Invalid Input, Try Again.");
+                        name = in.readLine();
+                    }
                     System.out.println("Enter Gender as 'M/F':");
                     gtype = in.readLine();
+                    while(!gtype.toUpperCase().equals("M") && !gtype.toUpperCase().equals("F")){
+                        System.out.println("Invalid Input, Try Again.");
+                        gtype = in.readLine();
+                    }
                     System.out.println("Enter age: ");
                     age = in.readLine();
+                    while(!checkage(age)){
+                        System.out.println("Invalid Input, Try Again.");
+                        age = in.readLine();
+                    }
                     System.out.println("Enter address: ");
                     address = in.readLine();
-
                     if (patient_id.equals("x")) { //new patient
+
                         System.out.println("welcome new patient ");
-                        Integer npid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
-                        System.out.println("npid " + npid);
-                        query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + npid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
+                        newpid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
+                        System.out.println("npid " + newpid);
+                        query = "INSERT INTO patient (patient_id,  name, gtype, age, address ,number_of_appts) VALUES ( " + newpid + ", '" + name + "' , '" + gtype + "' , " + age + " , '" + address + "' , 1 );";
                         esql.executeUpdate(query); //insert new patient
                     } else { //old patient
-                        //patient_id,  name, gtype, age, address ,number_of_appts
-                        System.out.println("is the info above yours? ");
+                        String temp = "select * from patient where patient_id = " + patient_id;
+                        System.out.println(esql.executeQueryAndPrintResult(temp));
+                        System.out.println("is the info above yours? Y/N");
+                        if(in.readLine().toUpperCase().equals("Y")){
+                            newpid = Integer.parseInt(patient_id);
+                        }
+                        else{
+                            System.out.println("please enter as new patient, patient id not found");
+                            return;
+                        }
+
                     }
                     if (foundstatus.equals("AV")) {//update appt
                         System.out.println("status is av change to ac ");
-                        Integer npid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
-                        query = "update appointment set status = 'AC' where appnt_id = " + npid + " ;";
+                        //Integer npid = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(patient_id) from patient;").get(0).get(0));
+                        query = "update appointment set status = 'AC' where appnt_id = " + newpid + " ;";
                         esql.executeUpdate(query);
                     }
                     if (foundstatus.equals("AC")) {// insert new appt, hasappt
                         System.out.println("status is ac change to wl ");
                         Integer appnt_ID = 1 + Integer.parseInt(esql.executeQueryAndReturnResult("select max(appnt_id) from appointment;").get(0).get(0));
                         System.out.println("appnid: " + appnt_ID);
-                        System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
-
+                        //System.out.println( esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0));
+                        ///////////////////////////////////////////////////////////
                         String getadate = (esql.executeQueryAndReturnResult("select adate from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
                         System.out.println("adate " + getadate);
                         String gettime = (esql.executeQueryAndReturnResult("select time_slot from appointment where appnt_id = " + appnt_ID + " ;").get(0).get(0));
@@ -528,11 +670,24 @@ public class DBproject {
             date1 = date2 = "'";
             System.out.println("Enter Doctor ID:");
             doctor_id = in.readLine();
-            System.out.println("Enter Start Date");
-            date1 += in.readLine();
-            System.out.println("Enter End Date");
-            date2 += in.readLine();
-
+            while(!checkint(doctor_id)){
+                System.out.println("Invalid Input, Try Again.");
+                doctor_id = in.readLine();
+            }
+            System.out.println("Enter Start Date (YYYY/MM/DD):");
+            String temp1 = in.readLine();
+            while(!checkdate(temp1)){
+                System.out.println("Invalid Input, Try Again.");
+                temp1 = in.readLine();
+            }
+            System.out.println("Enter End Date (YYYY/MM/DD):");
+            String temp2 =  in.readLine();
+            while(!checkdate(temp2)){
+                System.out.println("Invalid Input, Try Again.");
+                temp2= in.readLine();
+            }
+            date1 += temp1;
+            date2 += temp2;
             date1 += "'";
             date2 += "'";
             System.out.println("Looking for appointment for DocID : " + doctor_id + " Date Range: " + date1 + " - " + date2);
@@ -554,10 +709,19 @@ public class DBproject {
         try {
             String date, name;
             date = name = "'";
-            System.out.println("Enter Date:");
-            date += in.readLine();
+            System.out.println("Enter Date (YYYY/MM/DD) :");
+            String temp2 = in.readLine();
+            while(!checkdate(temp2)){
+                System.out.println("Invalid Input, Try Again.");
+                temp2= in.readLine();
+            }
+            date += temp2;
             System.out.println("Enter Department Name:");
             name += in.readLine();
+            while(!checkname(name)){
+                System.out.println("Invalid Input, Try Again.");
+                name= in.readLine();
+            }
             date += "'";
             name += "'";
             System.out.println("Available Appointments Of Department : " + name + " Date: " + date);
@@ -597,14 +761,18 @@ public class DBproject {
         // Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
 
         try {
-            String status = "'";
+            String status = "'", status1;
             System.out.println("Enter Status:");
-            status += in.readLine();
+            status1 = in.readLine();
+            while(!checkstatus(status1)){
+                System.out.println("Invalid Input, Try Again.");
+                status1= in.readLine();
+            }
 
-
+            status += status1;
             status += "'";
             System.out.println("Looking for Patients Count per doctor With Status : " + status);
-            String query = "select has_appointment.doctor_id, doctor.name, count(has_appointment.doctor_id) as Num_of_Patient from appointment INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id INNER JOIN doctor on doctor.doctor_id =  has_appointment.doctor_id INNER JOIN searches on searches.aid = appointment.appnt_id where status = " + status + " and searches.hid = '0' group by has_appointment.doctor_id, doctor.name order by Num_of_Patient  desc;";
+            String query = "select has_appointment.doctor_id, doctor.name, count(has_appointment.doctor_id) as Num_of_Patient from appointment INNER JOIN has_appointment on appointment.appnt_id =  has_appointment.appt_id INNER JOIN doctor on doctor.doctor_id =  has_appointment.doctor_id INNER JOIN department on department.dept_id = doctor.did INNER JOIN searches on searches.aid = appointment.appnt_id where status = " + status + " and searches.hid = '0' group by has_appointment.doctor_id, doctor.name order by Num_of_Patient  desc;";
 
             System.out.println(esql.executeQueryAndPrintResult(query));
         } catch (Exception e) {
